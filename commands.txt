@@ -1,0 +1,11 @@
+"C:\Program Files\MongoDB\Server\4.2\bin\mongo.exe"
+
+
+show dbs
+use a5
+show collections
+db.cards.find()
+db.config.find()
+db.users.find()
+db.cards.count()
+db.users.remove(false)
