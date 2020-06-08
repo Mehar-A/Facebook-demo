@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1>Profile for <span id="uname1"> </span></h1>
+    <a href="localhost:3000">Logout</a>
+    <table style="width:100%;">
+        <tr>
+            <td>
+                <h3><span id="uname2"></span>Cards</h3>
+                <ul id="mycards">
+
+                </ul>
+            </td>
+            <td>
+                <h3 ><span id="uname3"></span>Friends</h3>
+            </td>
+            <td>
+                <h3>Add Friend</h3>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                <h3>Pending Trade Requests</h3>
+            </td>
+            <td>
+                <h3>Propose a Trade</h3>
+            </td>
+            <td>
+                <h3>Select A Friend</h3>
+            </td>
+        </tr>
+    </table>
+    <script>
+        var nm = sessionStorage.getItem("username");
+        //Set Name
+        document.getElementById("uname").innerHTML = nm;
+        document.getElementById("uname2").innerHTML = nm;
+		document.getElementById("uname3").innerHTML = nm;
+
+        //Set Cards
+        var cardslist = '';
+        sessionStorage.getItem("mycards").forEach(element => {
+            cardslist += "<li>" +element.artist + "<li>";
+        });
+        document.getElementById("mycards").innerHTML = cardslist;
+    </script>
+</body>
+</html>

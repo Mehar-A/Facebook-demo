@@ -1,0 +1,12 @@
+html
+	head
+		h1 Cards information for #{CI.username}
+body
+	
+		H1 Friends Cards:
+		ul
+			each cards in JSON.parse(CI.mycards)
+				each value in cards
+					li
+						a(href="/card/"+value._id, value=value._id) #{value.artist}
+

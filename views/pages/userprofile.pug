@@ -1,0 +1,112 @@
+html
+	head
+		if loggedin
+			Sf Profile for #{user.username}, 
+			| 
+			a(href="/logout") Logout
+		else
+			h1 NOPE
+		style.
+			.column {
+			float: left;
+			}
+			.left {
+			width: 33%;
+			}
+			.right {
+			width: 25%;
+			}
+			.middle {
+			width: 40%;
+			}
+	body(onload='init()')
+			script(src="../client.js")
+			if loggedin
+				br
+				br
+				br
+				br
+				#main
+					#left.column.left
+						h1 #{user.username} cards
+						|
+						|
+						ul
+						each value in JSON.parse(user.mycards)
+							each cards in value
+								li
+									a(href="/card/"+cards._id, value=cards._id) #{cards.artist}
+						br
+						br 
+						h1 Pending Trade Request:
+						form(action='/accepttrade/' method='post')
+							p One of your friends wants to trade cards
+							ul
+								if ucards != null
+									p The new cards you will received				
+									each value in ucards
+										each v in value
+											div #{v.userscards}
+									
+									p The cards that you will loose
+										each value in ucards
+											each v in value
+												div #{v.friendscards}
+									button(type='submit') add
+									button(type='submit' formaction='/rejecttrade/') delete
+										
+					#middle.column.middle
+						h1 #{user.username} friends
+						ul
+							if FL != null
+								each v in FL
+									li
+										a(href="/FI/"+v, value =v) #{v}
+						#info1
+						br
+						br 
+						h1 Proprose a Trade:
+						p select your card to trade:
+							ul
+							each value in JSON.parse(user.mycards)
+								each cards in value	
+									li
+										input(type="checkbox" id=cards._id value=cards.artist class='checks') 
+										a(href="/card/"+cards._id, value=cards._id) #{cards.artist}
+							button(type='submit' onclick='trade()') Trade
+						#errorcheck
+					#right.column.right
+						h1 "Add Friend"
+						|Search by Name: 
+						input(type='text' id='myInput' required='' onkeyup='users()' placeholder='Search for names..')
+						button(type='submit' onclick='usersprint()') add
+						#info4
+						#info5
+						br
+						br
+						h1 Pending Friend Request:
+						form(action='/accept/' method='post')
+							ul
+								if FR != null
+									each value in FR
+										li=value
+											button(type='submit') add
+											button(type='submit' formaction='/reject/') delete
+						br
+						br 
+						h1 Friend Cards:
+						p Select a Friend
+							select(id='tc' form='friendSelect' name='pass' required)
+								if FL!=null
+									each friendname in FL
+										option(value=friendname) #{friendname}
+										
+								if friendcards != null
+							p Press button to show Friend Cards:												
+							button(type='submit' onclick='run()') Show
+						#info6
+			else
+		
+		
+
+			

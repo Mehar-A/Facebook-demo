@@ -1,0 +1,9 @@
+div#header
+	
+	if loggedin
+		a(href="/orderform") Order
+		| 
+		|Hello #{username}, 
+		a(href="/users/" + id) View Profile
+		| 
+		a(href="/logout") Logout
